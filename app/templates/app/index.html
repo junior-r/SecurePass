@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block style %} <link rel="stylesheet" href="{% static 'app/css/index.css' %}"> {% endblock %}
+
+{% block content %}
+{% for message in messages %}
+    {% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+{% endfor %}
+<div class="container vh-100">
+    <div class="d-flex flex-column h-100 justify-content-center align-items-center gap-5">
+        <h1 class="title text-center">
+            Seguridad, Confianza y Facilidad es lo que ofrecemos!!
+        </h1>
+        <p class="description w-75">
+            Ahora, todos vivimos en Internet. Trabajamos en Internet. Pasamos nuestro tiempo de ocio en Internet. Nos relacionamos con familiares y amigos a través de Internet. <a href="{% url 'home' %}" class="text-primary text-decoration-none">SecurePass</a> pone su vida digital al alcance de su mano de una forma sencilla y segura.
+        </p>
+    </div>
+</div>
+{% endblock %}

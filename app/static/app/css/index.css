@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,700;1,300;1,700&family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap');
+
+:root {
+    /*? Font Size */
+    --font-size-titles-big: 4rem;
+    --font-size-titles-normal: 3rem;
+    --font-size-pargp-big: 1.5rem;
+    --font-size-pargp-normal: 1rem;
+    --font-size-pargp-small: 0.8rem;
+
+    /*? Font Family */
+    --font-family-titles: 'Open Sans', sans-serif;
+    --font-weight-title: 700;
+    --font-family-pargp: 'Roboto', sans-serif;
+    --font-weight-pargp-bold: 700;
+    --font-weight-pargp-normal: 300;
+}
+
+.title {
+    font-family: var(--font-family-titles);
+    font-weight: var(--font-weight-title);
+    font-size: var(--font-size-titles-big);
+}
+
+.description {
+    font-family: var(--font-family-pargp);
+    font-weight: var(--font-weight-parghp-normal);
+    font-size: var(--font-size-pargp-big);
+}
