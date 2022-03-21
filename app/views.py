@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from app.models import CreatePassword
@@ -51,3 +51,28 @@ def view_passwords(request):
         'passwords': passwords
     }
     return render(request, 'app/boveda/view_passwords.html', data)
+
+
+def update_password(request, id):
+    password = get_object_or_404(CreatePassword, id=id)
+    data = {
+        'form': CreatePasswordForm(instance=password)
+    }
+
+    if request.method == 'POST':
+        formulario = CreatePasswordForm(data=request.POST, instance=password)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, 'Contraseña actualizada con éxito!')
+            return redirect(to='view_passwords')
+        data['form'] = formulario
+        
+
+    return render(request, 'app/boveda/update_password.html', data)
+
+
+def delete_password(request, id):
+    password = get_object_or_404(CreatePassword, id=id)
+    password.delete()
+    messages.success(request, 'Contraseña eliminada correctamente!')
+    return redirect(to='view_passwords')
