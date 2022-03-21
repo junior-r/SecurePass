@@ -1,9 +1,11 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from app.models import CreatePassword
 from .forms import CustomUserCreationForm, CreatePasswordForm
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -47,8 +49,15 @@ def createPassword(request):
 
 def view_passwords(request):
     passwords = CreatePassword.objects.all()
+    page = request.GET.get('page', 1)
+    try: 
+        paginator = Paginator(passwords, 13)
+        passwords = paginator.page(page)
+    except:
+        raise Http404
     data = {
-        'passwords': passwords
+        'entity': passwords,
+        'paginator': paginator
     }
     return render(request, 'app/boveda/view_passwords.html', data)
 
