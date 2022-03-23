@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -36,6 +37,7 @@ def registro(request):
     return render(request, 'registration/registro.html', data)
 
 
+@login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     passwords = CreatePassword.objects.filter(username=username)
@@ -60,6 +62,7 @@ def profile(request, username):
     return render(request, 'app/boveda/user_profile.html', data)
 
 
+@login_required
 def createPassword(request):
     data = {
         'form': CreatePasswordForm(),
@@ -74,6 +77,7 @@ def createPassword(request):
     return render(request, 'app/boveda/create_password.html', data)
 
 
+@login_required
 def view_passwords(request):
     passwords = CreatePassword.objects.all()
     page = request.GET.get('page', 1)
@@ -116,6 +120,7 @@ def contactos(request):
     return render(request, 'app/contactos.html')
 
 
+@login_required
 def update_password(request, id):
     password = get_object_or_404(CreatePassword, id=id)
     data = {
@@ -134,10 +139,9 @@ def update_password(request, id):
     return render(request, 'app/boveda/update_password.html', data)
 
 
+@login_required
 def delete_password(request, id):
     password = get_object_or_404(CreatePassword, id=id)
     password.delete()
     messages.success(request, 'Contraseña eliminada correctamente!')
     return redirect(to='view_passwords')
-
-
