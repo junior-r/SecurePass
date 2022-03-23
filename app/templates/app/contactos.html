@@ -1,0 +1,85 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+<title>Contactos</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'app/imagenes/iconos-contactos/style.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/contactos.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5 mb-5 text-center">Contáctanos!</h1>
+    <hr>
+    <div class="redes d-flex gap-4 justify-content-center mb-5">
+        <div class="red whtsp">
+            <a href="https://api.whatsapp.com/send?phone=+58 4129032865">
+                <button type="button" class="button">
+                    <span class="icon-whatsapp"></span>
+                    Whatsapp
+                </button>
+            </a>
+        </div>
+        <div class="red fcbo">
+            <a href="https://www.facebook.com/wilfred.ruiz.5496/">
+                <button type="button" class="button">
+                    <span class="icon-facebook"></span>
+                    Facebook
+                </button>
+            </a>
+        </div>
+        <div class="red tiktok">
+            <a href="https://www.tiktok.com/@juniorruiz733">
+                <button type="button" class="button">
+                    <span class="icon-tiktok"></span>
+                    Tik Tok
+                </button>
+            </a>
+        </div>
+        <div class="red instg">
+            <a href="https://www.instagram.com/junior.r14/">
+                <button type="button" class="button">
+                    <span class="icon-instagram"></span>
+                    Instagram
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+    <br><br><br>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="mb-4"><span class="icon-gmail"></span> Envíanos un Mail</h2>
+                    <form action="" method="POST" class="form-email">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label text-dark">Dirección Email</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" required placeholder="example@example.com" name="dir_email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label text-dark">Asunto</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" required placeholder="Título del Correo" name="asunto" minlength="2" maxlength="50">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label text-dark">Mensaje</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" required placeholder="Escribe algo..." rows="3" name="subject" minlength="2"></textarea>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                            <button class="btn btn-secondary" type="reset">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
