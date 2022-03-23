@@ -1,4 +1,3 @@
-import logging
 from django import forms
 from .models import CreatePassword
 from django.contrib.auth.forms import UserCreationForm
@@ -10,7 +9,6 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
 
 class CreatePasswordForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, min_length=8, max_length=50)

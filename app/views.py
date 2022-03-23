@@ -6,6 +6,9 @@ from app.models import CreatePassword
 from .forms import CustomUserCreationForm, CreatePasswordForm
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 
 # Create your views here.
 
@@ -34,8 +37,27 @@ def registro(request):
 
 
 def profile(request, username):
-    username = User.objects.get(username=username)
-    return render(request, 'app/boveda/user_profile.html')
+    user = get_object_or_404(User, username=username)
+    passwords = CreatePassword.objects.filter(username=username)
+    data = {
+        'form': CustomUserCreationForm(instance=user),
+        'user': user
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST, instance=user)
+        if formulario.is_valid():
+            for p in passwords:
+                p.username = user.username
+                p.save()
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
+            login(request, user)
+            messages.success(request, 'Perfil actualizado con éxito!')
+            return redirect(to='view_passwords')
+        data['form'] = formulario
+
+    return render(request, 'app/boveda/user_profile.html', data)
 
 
 def createPassword(request):
@@ -67,6 +89,33 @@ def view_passwords(request):
     return render(request, 'app/boveda/view_passwords.html', data)
 
 
+def contactos(request):
+
+    if request.method == 'POST':
+        dir_email = request.POST['dir_email'] # Email que el usuario ingrese en el input.
+        asunto = request.POST['asunto'] # Asunto del email.
+        subject = request.POST['subject'] + ' Att: ' + dir_email # Mensaje del usuario.
+
+        template = render_to_string('app/email_template.html', {'dir_name': dir_email, 'subject': subject})
+
+        email = EmailMessage(
+            asunto,
+            template,
+            settings.EMAIL_HOST_USER,
+            ['junior31064049@gmail.com']
+        )
+
+        email.fail_silently = False
+        try:
+            email.send()
+            messages.success(request, 'Tu Correo ha sido enviado con exito!.')
+            return redirect(to='contactos')
+        except:
+            messages.error(request, 'Ha ocurrido un error al enviar el Email')
+
+    return render(request, 'app/contactos.html')
+
+
 def update_password(request, id):
     password = get_object_or_404(CreatePassword, id=id)
     data = {
@@ -92,5 +141,3 @@ def delete_password(request, id):
     return redirect(to='view_passwords')
 
 
-def error_404(request, exception):
-    return render(request, 'app/error_404.html')
