@@ -1,6 +1,11 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block style %} <link rel="stylesheet" href="{% static 'app/css/index.css' %}"> {% endblock %}
+{% block title %}
+<title>Inicio</title>
+{% endblock %}
+{% block style %} 
+<link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container vh-100">

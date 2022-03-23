@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 from app.models import CreatePassword
 from .forms import CustomUserCreationForm, CreatePasswordForm
 from django.contrib.auth import authenticate, login
@@ -31,6 +31,11 @@ def registro(request):
         data['form'] = formulario
 
     return render(request, 'registration/registro.html', data)
+
+
+def profile(request, username):
+    username = User.objects.get(username=username)
+    return render(request, 'app/boveda/user_profile.html')
 
 
 def createPassword(request):
@@ -85,3 +90,7 @@ def delete_password(request, id):
     password.delete()
     messages.success(request, 'Contraseña eliminada correctamente!')
     return redirect(to='view_passwords')
+
+
+def error_404(request, exception):
+    return render(request, 'app/error_404.html')
