@@ -38,7 +38,7 @@ def registro(request):
 
 
 @login_required
-def profile(request, username):
+def editProfile(request, username):
     user = get_object_or_404(User, username=username)
     passwords = CreatePassword.objects.filter(username=username)
     data = {
