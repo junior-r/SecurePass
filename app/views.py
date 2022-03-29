@@ -38,6 +38,15 @@ def registro(request):
 
 
 @login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    data = {
+        'user': user
+    }
+    return render(request, 'app/profile.html', data)
+
+
+@login_required
 def editProfile(request, username):
     user = get_object_or_404(User, username=username)
     passwords = CreatePassword.objects.filter(username=username)
@@ -59,7 +68,7 @@ def editProfile(request, username):
             return redirect(to='view_passwords')
         data['form'] = formulario
 
-    return render(request, 'app/boveda/user_profile.html', data)
+    return render(request, 'app/editProfile.html', data)
 
 
 @login_required

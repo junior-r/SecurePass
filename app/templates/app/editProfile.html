@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Editar Perfil</title>
+{% endblock %}
+
+{% block content %}
+<br><br><br>
+<div class="card shadow">
+<h1 class="card-header">Perfil de {{user.username | title}}</h1>
+    <div class="card-body">
+        <form action="" method="post" class="d-flex flex-column gap-3">
+            {% csrf_token %}
+            {{ form }}
+            <div class="container-buttons d-flex gap-2 justify-content-end">
+                <button type="button" class="btn btn-danger">
+                    <a href="{% url 'profile' user.username %}" class="text-decoration-none text-white">Cancelar</a>
+                </button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </form>
+        <!-- <form action="" method="post" class="d-flex gap-3 flex-column">
+            {% csrf_token %}
+            <section class="header">
+                <h3 class="card-title">Editando el Perfil</h3>
+                <p class="card-text">Aquí puedes editar la información que proporcionaste al momento de crear tu cuenta.</p>
+            </section>
+            
+            <section class="names border-start border-4 border-primary ps-3">
+                <h5 class="card-title">Nombres</h5>
+                <input type="text" class="text-dark border-1 rounded-2 border-primary ms-3" value="{{user.first_name}}">
+            </section>
+            <section class="last_names border-start border-4 border-secondary ps-3">
+                <h5 class="card-title">Apellidos</h5>
+                <input type="text" class="text-dark border-1 rounded-2 border-secondary ms-3" value="{{user.last_name}}">
+            </section>
+            <section class="username border-start border-4 border-success ps-3">
+                <h5 class="card-title">Nombre de Usuario</h5>
+                <input type="text" class="text-dark border-1 rounded-2 border-success ms-3" value="{{user.username}}">
+            </section>
+            <section class="email border-start border-4 border-info ps-3">
+                <h5 class="card-title">Correo Electrónico</h5>
+                <input type="text" class="text-dark border-1 rounded-2 border-info ms-3" value="{{user.email}}">
+            </section>
+            <section class="password border-start border-4 border-dark ps-3">
+                <h5 class="card-title">Contraseña</h5>
+                <span class="d-block ms-3">* Para cambiar la contraseña, tienes que borrar la que se ve en el campo de abajo.</span>
+                <input type="password" class="text-dark border-1 rounded-2 border-dark ms-3" value="{{user.password}}">
+            </section>
+            <hr>
+            <div class="container-buttons d-flex gap-2 justify-content-end">
+                <button type="button" class="btn btn-danger">
+                    <a href="{% url 'profile' user.username %}" class="text-decoration-none text-white">Cancelar</a>
+                </button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </form> -->
+    </div>
+</div>
+{% endblock %}

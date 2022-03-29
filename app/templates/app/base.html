@@ -39,7 +39,7 @@
                   <li><a class="dropdown-item" href="{% url 'create_password' %}">Agregar Contraseña</a></li>
                   <li><a class="dropdown-item" href="{% url 'view_passwords' %}">Ver Contraseñas</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'editProfile' user.username %}">Perfil</a></li>
+                  <li><a class="dropdown-item" href="{% url 'profile' user.username %}">Perfil</a></li>
                 </ul>
               </li>
               {% endif %}
@@ -65,7 +65,7 @@
         </div>
     </nav>
 
-    <div class="container vh-100">
+    <div class="container min-vh-100">
       {% block content %}
       {% endblock %}
     </div>
