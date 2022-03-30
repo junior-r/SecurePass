@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -7,7 +8,7 @@ from django.contrib.auth.models import User
 class CreatePassword(models.Model):
     password = models.CharField(max_length=50)
     website = models.URLField()
-    creation_date = models.DateTimeField(auto_now=True)
+    creation_date = models.DateField(default=date.today)
     username = models.CharField(max_length=100)
 
     def __str__(self):
