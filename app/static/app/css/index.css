@@ -27,3 +27,14 @@
     font-weight: var(--font-weight-parghp-normal);
     font-size: var(--font-size-pargp-big);
 }
+
+.img_logo_big {
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+.img_logo_big:hover {
+    box-shadow: 4px 4px 15px 5px rgb(86, 43, 228);
+    border-radius: 2rem;
+    transform: scale(1.1);
+}

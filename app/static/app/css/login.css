@@ -1,0 +1,13 @@
+.img_logo_big {
+    transform: translate(-15%, -15%); 
+    position: absolute; 
+    border-radius: 0 0 50% 0;
+    width: 10rem;
+    height: 10rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.img_logo_big:hover {
+    width: 30rem;
+    height: 30rem;
+}

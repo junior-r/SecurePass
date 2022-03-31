@@ -8,12 +8,13 @@
 {% endblock %}
 
 {% block content %}
-    <div class="d-flex flex-column h-100 justify-content-center align-items-center gap-5">
+    <div class="d-flex flex-column vh-100 justify-content-center align-items-center gap-5">
         <h1 class="title text-center">
             Seguridad, Confianza y Facilidad es lo que ofrecemos!!
         </h1>
         <p class="description w-75">
             Ahora, todos vivimos en Internet. Trabajamos en Internet. Pasamos nuestro tiempo de ocio en Internet. Nos relacionamos con familiares y amigos a través de Internet. <a href="{% url 'home' %}" class="text-primary text-decoration-none">SecurePass</a> pone su vida digital al alcance de su mano de una forma sencilla y segura.
         </p>
+        <img src="{% static 'app/imagenes/Logo SecurePass.svg' %}" alt="Logo de la app Secure Pass" class="img_logo_big" loading="lazy">
     </div>
 {% endblock %}
