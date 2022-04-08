@@ -15,26 +15,38 @@
             <p class="card-text">Aquí se encuentra toda la información que proporcionaste al momento de crear tu cuenta.</p>
         </section>
 
-        <section class="names border-start border-4 border-primary ps-3">
-            <h5 class="card-title">Nombres</h5>
-            <p class="card-text ps-3">{{user.first_name | title}}</p>
-        </section>
-        <section class="last_names border-start border-4 border-secondary ps-3">
-            <h5 class="card-title">Apellidos</h5>
-            <p class="card-text ps-3">{{user.last_name | title}}</p>
-        </section>
-        <section class="username border-start border-4 border-success ps-3">
-            <h5 class="card-title">Nombre de Usuario</h5>
-            <p class="card-text ps-3">{{user.username | title}}</p>
-        </section>
-        <section class="email border-start border-4 border-info ps-3">
-            <h5 class="card-title">Correo Electrónico</h5>
-            <p class="card-text ps-3">{{user.email}}</p>
-        </section>
-        <section class="password border-start border-4 border-dark ps-3">
-            <h5 class="card-title">Contraseña</h5>
-            <input type="password" class="text-dark border-0 ps-3" disabled value="{{user.password}}">
-        </section>
+        <div class="body__profile d-flex gap-3">
+
+            <section class="img_profile">
+                <figure class="image_profile_body" style="background-image: url({{ user.get_image }}); height: 400px; width: 400px; border-radius: 10px; background-size: cover; background-position: center">
+
+                </figure>
+            </section>
+
+            <div class="content_profile d-flex flex-column justify-content-evenly">
+                <section class="names border-start border-4 border-primary ps-3">
+                    <h5 class="card-title">Nombres</h5>
+                    <p class="card-text ps-3">{{user.first_name | title}}</p>
+                </section>
+                <section class="last_names border-start border-4 border-secondary ps-3">
+                    <h5 class="card-title">Apellidos</h5>
+                    <p class="card-text ps-3">{{user.last_name | title}}</p>
+                </section>
+                <section class="username border-start border-4 border-success ps-3">
+                    <h5 class="card-title">Nombre de Usuario</h5>
+                    <p class="card-text ps-3">{{user.username | title}}</p>
+                </section>
+                <section class="email border-start border-4 border-info ps-3">
+                    <h5 class="card-title">Correo Electrónico</h5>
+                    <p class="card-text ps-3">{{user.email}}</p>
+                </section>
+                <section class="password border-start border-4 border-dark ps-3">
+                    <h5 class="card-title">Contraseña</h5>
+                    <input type="password" class="text-dark border-0 ps-3" disabled value="{{user.password}}">
+                </section>
+            </div>
+
+        </div>
         <hr>
         <a href="{% url 'editProfile' user.username %}" class="btn btn-primary me-auto">Editar Perfil</a>
     </div>

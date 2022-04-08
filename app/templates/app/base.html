@@ -51,6 +51,12 @@
                 <p class="username mb-0">
                   Bienvenido @{{user.username}}
                 </p>
+                {% if user.picture_profile %}
+                    <figure class="image_profile_header" style="background-image: url({{ user.get_image }});">
+
+                    </figure>
+                {% endif %}
+
                 <a href="{% url 'logout' %}" class="text-light text-decoration-none">
                   <button type="button" class="btn btn-danger">Cerrar Sesión</button>
                 </a>

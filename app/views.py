@@ -1,9 +1,9 @@
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.models import User
+from .models import CreationUser
 from app.models import CreatePassword
-from .forms import CustomUserCreationForm, CreatePasswordForm
+from .forms import CreationUserForm, CreatePasswordForm
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
 from django.core.mail import EmailMessage
@@ -13,20 +13,20 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
 def home(request):
     return render(request, 'app/index.html')
 
 
 def registro(request):
     data = {
-        'form': CustomUserCreationForm
+        'form': CreationUserForm
     }
 
     if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST)
+        formulario = CreationUserForm(request.POST, request.FILES)
         if formulario.is_valid():
             formulario.save()
-
             user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'Cuenta creada correctamente!')
@@ -39,7 +39,7 @@ def registro(request):
 
 @login_required
 def profile(request, username):
-    user = User.objects.get(username=username)
+    user = CreationUser.objects.get(username=username)
     data = {
         'user': user
     }
@@ -48,15 +48,15 @@ def profile(request, username):
 
 @login_required
 def editProfile(request, username):
-    user = get_object_or_404(User, username=username)
+    user = get_object_or_404(CreationUser, username=username)
     passwords = CreatePassword.objects.filter(username=username)
     data = {
-        'form': CustomUserCreationForm(instance=user),
+        'form': CreationUserForm(instance=user),
         'user': user
     }
 
     if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST, instance=user)
+        formulario = CreationUserForm(data=request.POST, instance=user)
         if formulario.is_valid():
             for p in passwords:
                 p.username = user.username

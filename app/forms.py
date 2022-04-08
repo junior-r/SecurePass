@@ -1,14 +1,22 @@
 from django import forms
-from .models import CreatePassword
+from .models import CreationUser, CreatePassword
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ValidationError
 
 
-class CustomUserCreationForm(UserCreationForm):
+class CreationUserForm(UserCreationForm):
+    picture_profile = forms.ImageField(required=False)
+    username = forms.TextInput()
+    email = forms.EmailInput()
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Contraseña (Confirmación)', widget=forms.PasswordInput)
+
     class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        model = CreationUser
+        fields = ['picture_profile', 'first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        exclude = ['last_origin', 'is_superuser', 'is_staff', 'is_active', 'date_joined']
+
 
 class CreatePasswordForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, min_length=8, max_length=50)
@@ -26,4 +34,3 @@ class CreatePasswordForm(forms.ModelForm):
     class Meta:
         model = CreatePassword
         fields = ['password', 'website', 'username']
-

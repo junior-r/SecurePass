@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <h2 class="title">Crear Cuenta</h2>
                         <hr>
-                        <form action="" method="post" class="d-flex flex-column gap-4">
+                        <form action="" enctype="multipart/form-data" method="post" class="d-flex flex-column gap-4">
                             {% csrf_token %}
                             {{ form | crispy }} <!-- Este formulario lo genera django -->
                             <div class="buttons d-flex flex-row gap-2 justify-content-between">
