@@ -53,7 +53,9 @@
                 </p>
                 {% if user.picture_profile %}
                     <figure class="image_profile_header" style="background-image: url({{ user.get_image }});">
-
+                    </figure>
+                {% else %}
+                    <figure class="image_profile_header" style="background-image: url({% static 'app/imagenes/anonymous-user.jpg' %});">
                     </figure>
                 {% endif %}
 

@@ -16,11 +16,14 @@
         </section>
 
         <div class="body__profile d-flex gap-3">
-
             <section class="img_profile">
+                {% if user.picture_profile %}
                 <figure class="image_profile_body" style="background-image: url({{ user.get_image }}); height: 400px; width: 400px; border-radius: 10px; background-size: cover; background-position: center">
-
                 </figure>
+                {% else %}
+                    <figure class="image_profile_body" style="background-image: url({% static 'app/imagenes/anonymous-user.jpg' %}); height: 400px; width: 400px; border-radius: 10px; background-size: cover; background-position: center">
+                    </figure>
+                {% endif %}
             </section>
 
             <div class="content_profile d-flex flex-column justify-content-evenly">
